@@ -12,7 +12,7 @@ create table IspitniRok(
 sifra int not null primary key identity(1,1),
 predmet varchar(50) not null,
 vrstaIspita varchar(20) not null,
-datum datetime,
+datum datetime null,
 pristupio bit not null,
 );
 
