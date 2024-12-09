@@ -9,7 +9,7 @@ GO
 
 
 CREATE TABLE knjiga (
-    sifra INT PRIMARY KEY IDENTITY(1,1),
+    sifra_knjige INT PRIMARY KEY IDENTITY(1,1),
     naslov VARCHAR(255) NOT NULL,
     autor VARCHAR(255) NOT NULL,
     zanr VARCHAR(100) NOT NULL
@@ -17,7 +17,7 @@ CREATE TABLE knjiga (
 
 
 CREATE TABLE kupac (
-    sifra INT PRIMARY KEY IDENTITY(1,1),
+    sifra_kupca INT PRIMARY KEY IDENTITY(1,1),
     ime VARCHAR(100) NOT NULL,
     prezime VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -28,24 +28,19 @@ CREATE TABLE kupac (
 
 CREATE TABLE narudzba (
     sifra_narudzbe INT PRIMARY KEY IDENTITY(1,1),
-    sifra_kupca INT NOT NULL,
     datum DATE NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status_narudzbe VARCHAR(50) NOT NULL,
     FOREIGN KEY (sifra_kupca) REFERENCES kupac(sifra)
 );
 
 
 CREATE TABLE artikli_narudzbe (
     sifra_artikala INT PRIMARY KEY IDENTITY(1,1),
-    sifra_narudzbe INT NOT NULL,
-    sifra_knjige INT NOT NULL,
     kolicina INT NOT NULL,
     cijena DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (sifra_narudzbe) REFERENCES narudzba(sifra_narudzbe),
-    FOREIGN KEY (sifra_knjige) REFERENCES knjiga(sifra)
+    FOREIGN KEY (sifra_knjige) REFERENCES knjiga(sifra_knjige)
 );
-
-SELECT * FROM kupac;
 
 INSERT INTO kupac (ime, prezime, email, adresa, broj_telefona) VALUES  
 ('Ante', 'Janković', 'antejankovic86@gmail.com', 'Trg Ante Starčevića 12, Osijek', '+385 91 234 5678'),
@@ -76,3 +71,48 @@ INSERT INTO kupac (ime, prezime, email, adresa, broj_telefona) VALUES
 ('Ivan', 'Strmečki', 'ivan.strmecki8@gmail.com', 'Antuna Mihanovića 20, Osijek', '+385 91 789 0126'),
 ('Bruno', 'Bašić', 'brunobasic031@gmail.com', 'Županijska ulica 42, Osijek', '+385 91 890 1237');
 
+INSERT INTO knjiga (naslov, autor, zanr) VALUES
+('To Kill a Mockingbird', 'Harper Lee', 'Fiction'),
+('1984', 'George Orwell', 'Dystopian'),
+('The Great Gatsby', 'F. Scott Fitzgerald', 'Classic'),
+('The Catcher in the Rye', 'J.D. Salinger', 'Fiction'),
+('Pride and Prejudice', 'Jane Austen', 'Romance'),
+('The Lord of the Rings', 'J.R.R. Tolkien', 'Fantasy'),
+('The Hobbit', 'J.R.R. Tolkien', 'Fantasy'),
+('Harry Potter and the Sorcerers Stone', 'J.K. Rowling', 'Fantasy'),
+('Moby-Dick', 'Herman Melville', 'Adventure'),
+('War and Peace', 'Leo Tolstoy', 'Historical Fiction');
+
+INSERT INTO narudzba (datum, status_narudzbe) VALUES
+('2024-12-01', 'Procesuirana'),
+('2024-12-02', 'Poslana'),
+('2024-12-03', 'U čekanju'),
+('2024-12-04', 'Dostavljena'),
+('2024-12-05', 'Otkazana');
+
+
+INSERT INTO artikli_narudzbe (kolicina, cijena, sifra_narudzbe, sifra_knjige) VALUES
+-- 1
+(2, 15.99, 1, 2), 
+(1, 12.50, 1, 7), 
+(3, 10.00, 1, 4),
+
+-- 2
+(1, 8.99, 2, 1),
+(2, 14.99, 2, 6),
+(1, 25.00, 2, 5),
+
+-- 3
+(1, 20.00, 3, 3),
+(2, 22.50, 3, 8),
+(3, 18.00, 3, 2),
+
+-- 4
+(1, 30.00, 4, 10),
+(1, 15.99, 4, 1),
+(2, 10.00, 4, 9),
+
+-- 5
+(1, 12.50, 5, 2),
+(1, 14.99, 5, 5),
+(2, 18.00, 5, 9);
