@@ -30,7 +30,7 @@ CREATE TABLE narudzba (
     sifra_narudzbe INT PRIMARY KEY IDENTITY(1,1),
     datum DATE NOT NULL,
     status_narudzbe VARCHAR(50) NOT NULL,
-    FOREIGN KEY (sifra_kupca) REFERENCES kupac(sifra)
+    sifra_kupca INT REFERENCES kupac(sifra_kupca)
 );
 
 
@@ -38,8 +38,8 @@ CREATE TABLE artikli_narudzbe (
     sifra_artikala INT PRIMARY KEY IDENTITY(1,1),
     kolicina INT NOT NULL,
     cijena DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (sifra_narudzbe) REFERENCES narudzba(sifra_narudzbe),
-    FOREIGN KEY (sifra_knjige) REFERENCES knjiga(sifra_knjige)
+    sifra_narudzbe INT REFERENCES narudzba(sifra_narudzbe),
+    sifra_knjige INT REFERENCES knjiga(sifra_knjige)
 );
 
 INSERT INTO kupac (ime, prezime, email, adresa, broj_telefona) VALUES  
@@ -83,12 +83,12 @@ INSERT INTO knjiga (naslov, autor, zanr) VALUES
 ('Moby-Dick', 'Herman Melville', 'Adventure'),
 ('War and Peace', 'Leo Tolstoy', 'Historical Fiction');
 
-INSERT INTO narudzba (datum, status_narudzbe) VALUES
-('2024-12-01', 'Procesuirana'),
-('2024-12-02', 'Poslana'),
-('2024-12-03', 'U čekanju'),
-('2024-12-04', 'Dostavljena'),
-('2024-12-05', 'Otkazana');
+INSERT INTO narudzba (datum, status_narudzbe, sifra_kupca) VALUES
+('2024-12-01', 'Procesuirana',9),
+('2024-12-02', 'Poslana',2),
+('2024-12-03', 'U čekanju',11),
+('2024-12-04', 'Dostavljena',17),
+('2024-12-05', 'Otkazana',26);
 
 
 INSERT INTO artikli_narudzbe (kolicina, cijena, sifra_narudzbe, sifra_knjige) VALUES
@@ -116,3 +116,5 @@ INSERT INTO artikli_narudzbe (kolicina, cijena, sifra_narudzbe, sifra_knjige) VA
 (1, 12.50, 5, 2),
 (1, 14.99, 5, 5),
 (2, 18.00, 5, 9);
+
+SELECT * FROM narudzba
