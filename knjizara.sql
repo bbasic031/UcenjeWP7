@@ -35,7 +35,7 @@ CREATE TABLE narudzba (
 
 
 CREATE TABLE artikli_narudzbe (
-    sifra_artikala INT PRIMARY KEY IDENTITY(1,1),
+    sifra INT PRIMARY KEY IDENTITY(1,1),
     kolicina INT NOT NULL,
     cijena DECIMAL(10, 2) NOT NULL,
     sifra_narudzbe INT REFERENCES narudzba(sifra_narudzbe),
