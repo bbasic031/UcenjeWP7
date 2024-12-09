@@ -87,7 +87,7 @@ INSERT INTO narudzba (datum, status_narudzbe, sifra_kupca) VALUES
 ('2024-12-01', 'Procesuirana',9),
 ('2024-12-02', 'Poslana',2),
 ('2024-12-03', 'U čekanju',11),
-('2024-12-04', 'Dostavljena',17),
+('2024-12-04', 'Dostavljena',9),
 ('2024-12-05', 'Otkazana',26);
 
 
@@ -117,4 +117,4 @@ INSERT INTO artikli_narudzbe (kolicina, cijena, sifra_narudzbe, sifra_knjige) VA
 (1, 14.99, 5, 5),
 (2, 18.00, 5, 9);
 
-SELECT * FROM narudzba
+SELECT * FROM artikli_narudzbe
