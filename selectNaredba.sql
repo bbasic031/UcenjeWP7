@@ -59,3 +59,46 @@ where izvodiseod between '2021-01-01' and '2024-06-30'
 
 
 
+use knjiznica;
+
+-- slaganje rezultat
+select prezime, ime from autor order by prezime asc, ime desc;
+select prezime, ime from autor order by 1 asc, 2 desc;
+
+-- ograničavanje rezultata
+select top 10 percent * from autor;
+
+select top 10 * from mjesto;
+
+-- rezultate select naredbe možemo spremiti u novu tablicu
+select top 10 * into nova from mjesto;
+
+select * from nova;
+drop table nova;
+
+-- unesite sebe kao autora
+select top 10 * from autor --order by sifra;
+INSERT into autor	(sifra, ime, prezime, datumrodenja)  
+values	(4,'Tomislav','Jakopec', '1980-12-07');
+
+-- Mladi Perica boluje jer ga je ostavila cura
+-- Što bi mu preporučili da čita iz Vaše knjižnice
+
+select count(*) from katalog; -- koliko ima zapisa
+
+select * from katalog
+where naslov like '%ljubav%' and
+sifra in (2541,2660,2664,2938);
+
+-- koliko ima izdavača koji su društvo s ograničenom odgovornošću?
+-- 145
+-- 147
+-- 150
+
+select count(*) from izdavac;
+
+select * from izdavac
+where naziv like '%d.%o%o%' or naziv like '%d%o%o.%';
+
+
+
