@@ -1,26 +1,88 @@
-SELECT * FROM grupe;
-
-SELECT b.naziv AS grupa, a.naziv AS smjer, b.predavac FROM smjerovi a INNER JOIN grupe b ON a.sifra = b.smjer;
-
-SELECT a.naziv, b.naziv AS grupa, b.predavac FROM smjerovi a LEFT JOIN grupe b ON a.sifra = b.smjer;
-
-SELECT b.naziv AS Grupa, a.naziv AS Smjer, d.ime AS Ime, d.prezime AS Prezime FROM smjerovi a LEFT JOIN grupe b ON a.sifra=b.smjer LEFT JOIN clanovi c ON b.sifra=c.grupa LEFT JOIN polaznici d ON c.polaznik=d.sifra;
+﻿select b.naziv as grupa, a.naziv as smjer,  b.predavac
+from smjerovi a inner join grupe b
+on a.sifra = b.smjer;
 
 
-USE knjiznica;
+select a.naziv, b.naziv as grupa, b.predavac
+from smjerovi a left join grupe b
+on a.sifra = b.smjer;
 
-SELECT a.ime, a.prezime, b.naslov, c.naziv AS izdavac, d.naziv AS mjesto FROM autor a INNER JOIN katalog b ON a.sifra=b.autor INNER JOIN izdavac c ON c.sifra=b.izdavac INNER JOIN mjesto d ON d.sifra=b.mjesto
+
+select b.naziv as grupa, 
+a.naziv as smjer, 
+d.ime, d.prezime
+from smjerovi a 
+inner join grupe b on a.sifra=b.smjer
+inner join clanovi c on b.sifra = c.grupa
+inner join polaznici d on d.sifra = c.polaznik;
 
 
-USE svastara;
 
-SELECT c.redniBroj, a.dugiNaziv, b.cijena, b.kolicina, b.cijena * b.kolicina AS vrijednost FROM Artikli a INNER JOIN ArtikliNaPrimci b ON a.sifra=b.artikl INNER JOIN Primke c ON c.sifra=b.primka WHERE c.redniBroj='1/2008';
+update grupe set predavac='Karla Let' where sifra=4;
 
-SELECT SUM(b.cijena * b.kolicina) AS vrijednost FROM Artikli a INNER JOIN ArtikliNaPrimci b ON a.sifra=b.artikl INNER JOIN Primke c ON c.sifra=b.primka WHERE c.redniBroj='1/2008';
 
-SELECT TOP 1 d.naziv, c.redniBroj, SUM(b.cijena * b.kolicina) AS vrijednost FROM Artikli a INNER JOIN ArtikliNaPrimci b ON a.sifra=b.artikl INNER JOIN Primke c ON c.sifra=b.primka INNER JOIN Dobavljaci d ON c.dobavljac=d.sifra GROUP BY c.redniBroj, d.naziv HAVING SUM(b.cijena * b.kolicina)>13000000 ORDER BY 2 DESC;
+select * from smjerovi;
 
-SELECT COUNT(*) FROM Artikli;
-SELECT DISTINCT artikl FROM ArtikliNaPrimci;
 
-SELECT * FROM Artikli WHERE sifra NOT IN(SELECT DISTINCT artikl FROM ArtikliNaPrimci);
+use knjiznica;
+
+-- izlistaj ime i prezime autora, naslov, izdavača i mjesto izdavanja
+
+
+select concat(a.ime, ' ', a.prezime) as autor,
+b.naslov, c.naziv as izdavac,
+d.naziv as mjesto
+from autor a
+inner join katalog b on a.sifra = b.autor
+inner join izdavac c on c.sifra = b.izdavac
+inner join mjesto d on d.sifra = b.mjesto
+where a.ime like 'I%'
+order by a.prezime;
+
+-- alternativa
+select autor.ime, autor.prezime,
+katalog.naslov, izdavac.naziv as izdavac,
+mjesto.naziv as mjesto
+from autor
+inner join katalog on autor.sifra = katalog.autor
+inner join izdavac on izdavac.sifra = katalog.izdavac
+inner join mjesto on mjesto.sifra = katalog.mjesto;
+
+
+
+use svastara;
+
+
+select  a.dugiNaziv, b.cijena, b.kolicina,
+b.cijena * b.kolicina as vrijednost
+from Artikli a
+inner join ArtikliNaPrimci b on a.sifra = b.artikl
+inner join Primke c on c.sifra=b.primka
+where c.redniBroj='1/2008';
+
+
+select  sum(b.cijena * b.kolicina) as vrijednost
+from Artikli a
+inner join ArtikliNaPrimci b on a.sifra = b.artikl
+inner join Primke c on c.sifra=b.primka
+where c.redniBroj='1/2008';
+
+
+select c.redniBroj, 
+d.naziv,
+sum(b.cijena * b.kolicina) as vrijednost
+from Artikli a
+inner join ArtikliNaPrimci b on a.sifra = b.artikl
+inner join Primke c on c.sifra=b.primka
+inner join Dobavljaci d on c.dobavljac=d.sifra
+group by c.redniBroj, d.naziv
+having sum(b.cijena * b.kolicina)>13000000
+order by 2 desc;
+
+-- podupiti
+select count(*) from Artikli; -- 52601
+select distinct artikl from ArtikliNaPrimci; -- 52599
+
+select * from artikli where sifra not in(
+select distinct artikl from ArtikliNaPrimci
+);
