@@ -93,5 +93,115 @@ namespace Ucenje
 
 
          */
+        public static void povrsinaPravokutnika()
+        {
+            double duljina, sirina;
+            Console.WriteLine("Unesite duljinu pravokutnika u cm: ");
+            duljina=Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Unesite širinu pravokutnika u cm: ");
+            sirina = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Površina pravokutnika iznosi: "+duljina*sirina+"cm");
+        }
+
+        public static void provjeraNegativnosti()
+        {
+            Console.WriteLine("Unesite broj: ");
+            double broj=Convert.ToDouble(Console.ReadLine());
+            if (broj == 0)
+                Console.WriteLine("Vaš broj je 0");
+            else if (broj < 0)
+                Console.WriteLine("Vaš broj je negativan");
+            else
+                Console.WriteLine("Vaš broj je pozitivan");
+        }
+
+        public static void zbrojElemenataNiza()
+        {
+            Console.WriteLine("Unesite broj elemenata niza: ");
+            int n = int.Parse(Console.ReadLine());
+            int[] niz = new int[n];
+            Console.WriteLine("Unesite elemente niza: ");
+            int zbroj = 0;
+            for(int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Element "+(i+1)+": ");
+                niz[i] = int.Parse(Console.ReadLine());
+                zbroj += niz[i];
+            }
+            Console.WriteLine("Zbroj elemenata niza je: "+zbroj);
+        }
+
+        public static void prosjekOcjena()
+        {
+            Console.WriteLine("Unesite broj ocjena: ");
+            int n = int.Parse(Console.ReadLine());
+            float[] niz = new float[n];
+            Console.WriteLine("Unesite ocjene: ");
+            float zbroj = 0;
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Ocjena broj " + (i + 1) + ": ");
+                niz[i] = int.Parse(Console.ReadLine());
+                zbroj += niz[i];
+            }
+            Console.WriteLine("Prosjek ocjena je: " + (zbroj/n).ToString("0.00"));
+        }
+
+        public static void fibonacciNiz()
+        {
+            Console.WriteLine("Koliko elemenata fibonaccijevog niza želite?");
+            int n = int.Parse(Console.ReadLine());
+            int[] niz = new int[n];
+            niz[0] = 0;
+            niz[1] = 1;
+            for(int i = 2; i < n; i++)
+            {
+                niz[i] = niz[i - 2] + niz[i - 1];
+            }
+            Console.WriteLine("Fibonaccijev niz s "+n+" elemenata: ");
+            foreach(int x in niz)
+                Console.Write(x+" ");
+        }
+
+        public static void izvrnutiString()
+        {
+            Console.WriteLine("Unesite string: ");
+            string unos = Console.ReadLine();
+            char[] nizZnakova = unos.ToCharArray();
+            Array.Reverse(nizZnakova);
+            string naopako = new string(nizZnakova);
+            Console.WriteLine("Preokrenuti string glasi: "+naopako);
+        }
+
+        public static void samoglasnici()
+        {
+            Console.WriteLine("Upisite trazenu rijec: ");
+            string unos = Console.ReadLine();
+            string samoglasnici = "aeiou";
+            char[] chars = samoglasnici.ToCharArray();
+            int brojac = 0;
+            foreach(char c in unos)
+            {
+                if(samoglasnici.Contains(c))
+                    brojac++;
+            }
+            Console.WriteLine("Broj samoglasnika: " + brojac);
+        }
+
+        public static void tempConverter()
+        {
+            Console.WriteLine("Upisujete li temperaturu u C ili F? (upisite samo c ili f)");
+            string unos= Console.ReadLine();
+            Console.WriteLine("Unesite iznos temperature u " + unos+" : ");
+            float iznos = float.Parse(Console.ReadLine());
+            if (unos == "c")
+            {
+                Console.WriteLine("Temperatura pretvorena u F glasi: " + ((iznos * 9 / 5) + 32).ToString("0.00") + "F");
+            }
+            else if (unos == "f")
+            {
+                Console.WriteLine("Temperatura pretvorena u C glasi: " + ((iznos - 32) * 5 / 9).ToString("0.00")+"C");
+            }
+        }
     }
 }

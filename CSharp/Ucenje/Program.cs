@@ -4,7 +4,7 @@
 
 using Ucenje;
 
-E12Z1.Izvedi();
+E09ZimskiZadaci.tempConverter();
 
 //E12ForEach.Izvedi();
 
