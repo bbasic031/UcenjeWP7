@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Ucenje
@@ -12,20 +11,18 @@ namespace Ucenje
         public static void Izvedi()
         {
             //Console.WriteLine("E11");
+
+            // do while osigurava izvođenje minimalno jedne iteracije
+            
             do
             {
                 Console.WriteLine("Izvede se jednom");
             } while (false);
 
-            int i = 2;
-            do
-            {
-                if (i % 2 == 0)
-                {
-                    Console.WriteLine(i);
-                }
-                i++;
-            } while (i < 28);
+            // sve ostalo navedeno u for (break i continue) te u while (&& || !) radi jednako i u do while
+
+            // Ispisati sve parne brojeve od 2 do 28 koristeći do while
+
         }
     }
 }
