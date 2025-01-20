@@ -4,7 +4,7 @@
 
 using Ucenje;
 
-E14Z3.Izvedi();
+PasswordGenerator.Generate();
 
 //E13TryCatch.Izvedi();
 
