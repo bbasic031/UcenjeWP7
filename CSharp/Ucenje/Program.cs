@@ -4,7 +4,7 @@
 
 using Ucenje;
 
-E13Z2.Izvedi();
+E09ZimskiZadaci.PasswordGenerator();
 
 //E13TryCatch.Izvedi();
 

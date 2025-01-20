@@ -97,16 +97,16 @@ namespace Ucenje
         {
             double duljina, sirina;
             Console.WriteLine("Unesite duljinu pravokutnika u cm: ");
-            duljina=Convert.ToDouble(Console.ReadLine());
+            duljina = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Unesite širinu pravokutnika u cm: ");
             sirina = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Površina pravokutnika iznosi: "+duljina*sirina+"cm");
+            Console.WriteLine("Površina pravokutnika iznosi: " + duljina * sirina + "cm");
         }
 
         public static void provjeraNegativnosti()
         {
             Console.WriteLine("Unesite broj: ");
-            double broj=Convert.ToDouble(Console.ReadLine());
+            double broj = Convert.ToDouble(Console.ReadLine());
             if (broj == 0)
                 Console.WriteLine("Vaš broj je 0");
             else if (broj < 0)
@@ -122,13 +122,13 @@ namespace Ucenje
             int[] niz = new int[n];
             Console.WriteLine("Unesite elemente niza: ");
             int zbroj = 0;
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Element "+(i+1)+": ");
+                Console.WriteLine("Element " + (i + 1) + ": ");
                 niz[i] = int.Parse(Console.ReadLine());
                 zbroj += niz[i];
             }
-            Console.WriteLine("Zbroj elemenata niza je: "+zbroj);
+            Console.WriteLine("Zbroj elemenata niza je: " + zbroj);
         }
 
         public static void prosjekOcjena()
@@ -144,7 +144,7 @@ namespace Ucenje
                 niz[i] = int.Parse(Console.ReadLine());
                 zbroj += niz[i];
             }
-            Console.WriteLine("Prosjek ocjena je: " + (zbroj/n).ToString("0.00"));
+            Console.WriteLine("Prosjek ocjena je: " + (zbroj / n).ToString("0.00"));
         }
 
         public static void fibonacciNiz()
@@ -154,13 +154,13 @@ namespace Ucenje
             int[] niz = new int[n];
             niz[0] = 0;
             niz[1] = 1;
-            for(int i = 2; i < n; i++)
+            for (int i = 2; i < n; i++)
             {
                 niz[i] = niz[i - 2] + niz[i - 1];
             }
-            Console.WriteLine("Fibonaccijev niz s "+n+" elemenata: ");
-            foreach(int x in niz)
-                Console.Write(x+" ");
+            Console.WriteLine("Fibonaccijev niz s " + n + " elemenata: ");
+            foreach (int x in niz)
+                Console.Write(x + " ");
         }
 
         public static void izvrnutiString()
@@ -170,7 +170,7 @@ namespace Ucenje
             char[] nizZnakova = unos.ToCharArray();
             Array.Reverse(nizZnakova);
             string naopako = new string(nizZnakova);
-            Console.WriteLine("Preokrenuti string glasi: "+naopako);
+            Console.WriteLine("Preokrenuti string glasi: " + naopako);
         }
 
         public static void samoglasnici()
@@ -180,9 +180,9 @@ namespace Ucenje
             string samoglasnici = "aeiou";
             char[] chars = samoglasnici.ToCharArray();
             int brojac = 0;
-            foreach(char c in unos)
+            foreach (char c in unos)
             {
-                if(samoglasnici.Contains(c))
+                if (samoglasnici.Contains(c))
                     brojac++;
             }
             Console.WriteLine("Broj samoglasnika: " + brojac);
@@ -191,8 +191,8 @@ namespace Ucenje
         public static void tempConverter()
         {
             Console.WriteLine("Upisujete li temperaturu u C ili F? (upisite samo c ili f)");
-            string unos= Console.ReadLine();
-            Console.WriteLine("Unesite iznos temperature u " + unos+" : ");
+            string unos = Console.ReadLine();
+            Console.WriteLine("Unesite iznos temperature u " + unos + " : ");
             float iznos = float.Parse(Console.ReadLine());
             if (unos == "c")
             {
@@ -200,7 +200,224 @@ namespace Ucenje
             }
             else if (unos == "f")
             {
-                Console.WriteLine("Temperatura pretvorena u C glasi: " + ((iznos - 32) * 5 / 9).ToString("0.00")+"C");
+                Console.WriteLine("Temperatura pretvorena u C glasi: " + ((iznos - 32) * 5 / 9).ToString("0.00") + "C");
+            }
+        }
+
+        public static void PasswordGenerator()
+        {
+            int duljina, kolicina;
+            bool velika = new bool();
+            bool mala = new bool();
+            bool brojevi = new bool();
+            bool znakovi = new bool();
+            bool brojPocetak = new bool();
+            bool interpunkcijskiPocetak = new bool();
+            bool brojKraj = new bool();
+            bool interpunkcijskiKraj = new bool();
+            bool ponavljanje=new bool();
+            Random random = new Random();
+            StringBuilder lozinka=new StringBuilder();
+            string popisZnakova = "!#$%&/()=?*<>|{}^";
+            string popisBrojeva = "0123456789";
+            string malaSlova = "abcdefghijklmnopqrstuvwxyz";
+            string velikaSlova = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            List<char> trenutneOpcije=new List<char>();
+            Console.WriteLine("Unesite duljinu lozinke: ");
+            while (true)
+            {
+                try
+                {
+                    duljina = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli broj!");
+                }
+            }
+            Console.WriteLine("Želite li velika slova? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    velika=bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            Console.WriteLine("Želite li mala slova? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    mala = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            Console.WriteLine("Želite li brojeve? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    brojevi = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            Console.WriteLine("Želite li znakove? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    znakovi = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            Console.WriteLine("Želite li početi lozinku s brojem? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    brojPocetak = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            while (true)
+            {
+                if (brojPocetak == true)
+                    break;
+                else
+                {
+                    Console.WriteLine("Želite li početi lozinku s interpunkcijskim? (True ili False)");
+                    try
+                    {
+                        interpunkcijskiPocetak = bool.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Niste unijeli True ili False!");
+                    }
+                }
+            }
+            Console.WriteLine("Želite li završiti lozinku s brojem? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    brojKraj = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }
+            while (true)
+            {
+                if (brojKraj == true)
+                    break;
+                else
+                {
+                    Console.WriteLine("Želite li završiti lozinku s interpunkcijskim? (True ili False)");
+                    try
+                    {
+                        interpunkcijskiKraj = bool.Parse(Console.ReadLine());
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Niste unijeli True ili False!");
+                    }
+                }
+            }
+            /*Console.WriteLine("Želite li lozinka ima ponavljajuće znakove? (True ili False)");
+            while (true)
+            {
+                try
+                {
+                    ponavljanje = bool.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli True ili False!");
+                }
+            }*/
+            Console.WriteLine("Koliko lozinki želite generirati?");
+            while (true)
+            {
+                try
+                {
+                    kolicina = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Niste unijeli broj!");
+                }
+            }
+            for(int i = 0; i < kolicina; i++)
+            {
+                int j = 0;
+                Console.WriteLine("Lozinka broj {0}: ",i+1);
+                if (brojPocetak)
+                {
+                    lozinka.Append(popisBrojeva[random.Next(popisBrojeva.Length)].ToString());
+                    j++;
+                }
+                else if (interpunkcijskiPocetak)
+                {
+                    lozinka.Append(popisZnakova[random.Next(popisZnakova.Length)].ToString());
+                    j++;
+                }
+                for (; j < duljina-(brojKraj||interpunkcijskiKraj?1:0); j++)
+                {
+                    trenutneOpcije.Clear();
+                    if (velika == true)
+                        trenutneOpcije.AddRange(velikaSlova);
+                    if (mala == true)
+                        trenutneOpcije.AddRange(malaSlova);
+                    if (brojevi == true)
+                        trenutneOpcije.AddRange(popisBrojeva);
+                    if (znakovi == true)
+                        trenutneOpcije.AddRange(popisZnakova);
+                    if (trenutneOpcije.Count > 0)
+                        lozinka.Append(trenutneOpcije[random.Next(trenutneOpcije.Count)]);
+                    else
+                    {
+                        lozinka.Append((char)('a' + random.Next(26)));
+                    }
+                }
+                if (brojKraj)
+                {
+                    lozinka.Append(popisBrojeva[random.Next(popisBrojeva.Length)].ToString());
+                }
+                else if (interpunkcijskiKraj)
+                {
+                    lozinka.Append(popisZnakova[random.Next(popisZnakova.Length)].ToString());
+                }
+                Console.WriteLine(lozinka.ToString());
+                lozinka.Clear();
             }
         }
     }
