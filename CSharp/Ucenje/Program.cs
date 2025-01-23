@@ -4,7 +4,15 @@
 
 using Ucenje;
 
-PasswordGenerator.Generate();
+E16Vjezbanje.Izvedi();
+
+//E15Rekurzija.Izvedi();
+
+//E14Z3.Izvedi();
+
+//E14Metode.Izvedi();
+
+//E13Z2.Izvedi();
 
 //E13TryCatch.Izvedi();
 
