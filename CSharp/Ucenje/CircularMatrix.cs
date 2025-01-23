@@ -87,7 +87,7 @@ namespace Ucenje
             } while (another != "NE");
         }
 
-        static int[,] CreateMatrix(int rows, int columns, string startingPosition, string orientation)
+        /*static int[,] CreateMatrix(int rows, int columns, string startingPosition, string orientation)
         {
             int[,] matrix = new int[rows, columns];
             if (startingPosition == "top left")
@@ -117,7 +117,6 @@ namespace Ucenje
 
                 }
 
-            }
+            }*/
         }
     }
-}

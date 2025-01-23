@@ -4,8 +4,7 @@
 
 using Ucenje;
 
-E16Vjezbanje.Izvedi();
-
+LoveCalculator.Calculate();
 //E15Rekurzija.Izvedi();
 
 //E14Z3.Izvedi();
